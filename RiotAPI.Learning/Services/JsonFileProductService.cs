@@ -26,19 +26,21 @@ namespace RiotAPI.Learning.Services {
             }
         }
 
-        public void AddRating( string productId, int rating ) {
+        public void AddRating(string productId, int rating) {
             var products = GetProducts();
 
-            if (products.First(x => x.Id == productId).Ratings == null) {
-                products.First(x => x.Id == productId).Ratings = new int[] { rating };
+            var query = products.First<Product>(x => x.Id == productId);
+
+            if(query.Ratings == null) {
+                query.Ratings = new int[] { rating };
             }
             else {
-                var ratings = products.First(x => x.Id == productId).Ratings.ToList();
+                var ratings = query.Ratings.ToList();
                 ratings.Add(rating);
-                products.First(x => x.Id == productId).Ratings = ratings.ToArray();
+                query.Ratings = ratings.ToArray();
             }
 
-            using (var outputStream = File.OpenWrite(JsonFileName)) {
+            using(var outputStream = File.OpenWrite(JsonFileName)) {
                 JsonSerializer.Serialize<IEnumerable<Product>>(
                     new Utf8JsonWriter(outputStream, new JsonWriterOptions {
                         SkipValidation = true,
@@ -48,6 +50,9 @@ namespace RiotAPI.Learning.Services {
                 );
             }
         }
+
+
+        
     }
 
 }
