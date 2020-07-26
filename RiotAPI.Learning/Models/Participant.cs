@@ -4,7 +4,7 @@ namespace RiotAPI.Learning.Models {
     public class Participant {
         public int participantId { get; set; }
         public int championId { get; set; }
-        public List<Runes> runes { get; set; }
+        public List<Rune> runes { get; set; }
         public ParticipantStats stats { get; set; }
         public int teamId { get; set; }
         public ParticipantTimeline timeline { get; set; }
