@@ -24,6 +24,7 @@ namespace RiotAPI.Learning {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices( IServiceCollection services ) {
             services.AddRazorPages();
+            services.AddServerSideBlazor();
             services.AddControllers();
             services.AddTransient<JsonFileProductService>();
         }
@@ -49,6 +50,7 @@ namespace RiotAPI.Learning {
             app.UseEndpoints(endpoints => {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
+                endpoints.MapBlazorHub();
                 //endpoints.MapGet("/products", ( context ) => {
                 //    var products = app.ApplicationServices.GetService<JsonFileProductService>().GetProducts();
                 //    var json = JsonSerializer.Serialize<IEnumerable<Product>>(products);
